@@ -13,8 +13,7 @@ int main()
  printf("Type another matrix of 3 rows & 3 colomns :\n");
  for(i=0;i<3;i++)
   for(j=0;j<3;j++)
-   scanf("%d",&arr2[i][j]);
- 
+   scanf("%d",&arr2[i][j]); 
  for(i=0;i<3;i++)
  {
   for(j=0;j<3;j++)
