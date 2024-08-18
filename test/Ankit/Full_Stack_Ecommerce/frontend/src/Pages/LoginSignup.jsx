@@ -34,6 +34,22 @@ const LoginSignup = () => {
   }
 
   const signup = async () => {
+    const username = document.getElementById("username").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    if(!username){
+      alert("Please enter a username");
+      document.getElementById("username").focus()
+      return false;
+    }else if(!email){
+      alert("Please enter an email");
+      document.getElementById("email").focus()
+      return false;
+    }else if(!password){
+      alert("Please enter a password");
+      document.getElementById("password").focus()
+    }else{
     let dataObj;
     await fetch('http://localhost:4000/signup', {
       method: 'POST',
@@ -55,15 +71,16 @@ const LoginSignup = () => {
         alert(dataObj.errors)
       }
   }
+}
 
   return (
     <div className="loginsignup">
       <div className="loginsignup-container">
         <h1>{state}</h1>
         <div className="loginsignup-fields">
-          {state==="Sign Up"?<input type="text" placeholder="Your name" name="username" value={formData.username} onChange={changeHandler}/>:<></>}
-          <input type="email" placeholder="Email address" name="email" value={formData.email} onChange={changeHandler}/>
-          <input type="password" placeholder="Password" name="password" value={formData.password} onChange={changeHandler}/>
+          {state==="Sign Up"?<input type="text" placeholder="Your name" id="username" name="username" value={formData.username} onChange={changeHandler}/>:<></>}
+          <input type="email" placeholder="Email address" id="email" name="email" value={formData.email} onChange={changeHandler}/>
+          <input type="password" placeholder="Password" id="password" name="password" value={formData.password} onChange={changeHandler}/>
         </div>
 
         <button onClick={()=>{state==="Login"?login():signup()}}>Continue</button>
