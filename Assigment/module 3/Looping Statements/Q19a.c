@@ -30,6 +30,9 @@
 // G H I J
 // K L M N O
 // P Q R S T U
+
+
+
 // #include <stdio.h>
 
 // int main() {
@@ -203,8 +206,7 @@ int main()
         for(col=end-1;col>=row+1;col--)
         {
             arr[col][row]=num++;
-            }
-
+        }
     }
     printf("print array:");
     for(row=0;row<size;row++){
