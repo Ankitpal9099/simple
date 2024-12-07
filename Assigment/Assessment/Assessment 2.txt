@@ -1,0 +1,95 @@
+mysql> CREATE TABLE product (
+    ->     product_id INT PRIMARY KEY,
+    ->     product_name VARCHAR(100),
+    ->     price DECIMAL(10, 2),
+    ->     product_code VARCHAR(50),
+    ->     company_code VARCHAR(50)
+    -> );
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> INSERT INTO product (product_id, product_name, price, product_code, company_code) VALUES
+    -> (1, 'Keyboard', 300.00, 'KB001', 'C001'),
+    -> (2, 'Motherboard', 1500.00, 'MB001', 'C002'),
+    -> (3, 'Monitor', 200.00, 'MN001', 'C001'),
+    -> (4, 'Speaker', 250.00, 'SP001', 'C003'),
+    -> (5, 'Mouse', 100.00, 'MS001', 'C001'),
+    -> (6, 'Graphics Card', 800.00, 'GC001', 'C002'),
+    -> (7, 'SSD', 1200.00, 'SD001', 'C003'),
+    -> (8, 'RAM', 600.00, 'RM001', 'C002');
+Query OK, 8 rows affected (0.02 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> select * from product;
++------------+---------------+---------+--------------+--------------+
+| product_id | product_name  | price   | product_code | company_code |
++------------+---------------+---------+--------------+--------------+
+|          1 | Keyboard      |  300.00 | KB001        | C001         |
+|          2 | Motherboard   | 1500.00 | MB001        | C002         |
+|          3 | Monitor       |  200.00 | MN001        | C001         |
+|          4 | Speaker       |  250.00 | SP001        | C003         |
+|          5 | Mouse         |  100.00 | MS001        | C001         |
+|          6 | Graphics Card |  800.00 | GC001        | C002         |
+|          7 | SSD           | 1200.00 | SD001        | C003         |
+|          8 | RAM           |  600.00 | RM001        | C002         |
++------------+---------------+---------+--------------+--------------+
+8 rows in set (0.06 sec)
+
+1.Query to find items whose prices are higher than or equal to 250rs, ordered by product price in descending and product name in ascending:
+
+mysql> SELECT product_name AS pro_name, price AS pro_price
+    -> FROM product
+    -> WHERE price >= 250
+    -> ORDER BY price DESC, product_name ASC;
++---------------+-----------+
+| pro_name      | pro_price |
++---------------+-----------+
+| Motherboard   |   1500.00 |
+| SSD           |   1200.00 |
+| Graphics Card |    800.00 |
+| RAM           |    600.00 |
+| Keyboard      |    300.00 |
+| Speaker       |    250.00 |
++---------------+-----------+
+6 rows in set (0.06 sec)
+2. Query to find the cheapest item:
+
+
+ SELECT product_name AS pro_name, price AS pro_price
+    -> FROM product
+    -> ORDER BY price ASC
+    -> LIMIT 1;
++----------+-----------+
+| pro_name | pro_price |
++----------+-----------+
+| Mouse    |    100.00 |
++----------+-----------+
+1 row in set (0.00 sec)
+
+3.Calculate the average price of the items for each company (assuming a company_code column exists):
+
+ SELECT AVG(price) AS average_price, product_code
+    -> FROM product
+    -> GROUP BY product_code;
++---------------+--------------+
+| average_price | product_code |
++---------------+--------------+
+|    300.000000 | KB001        |
+|   1500.000000 | MB001        |
+|    200.000000 | MN001        |
+|    250.000000 | SP001        |
+|    100.000000 | MS001        |
+|    800.000000 | GC001        |
+|   1200.000000 | SD001        |
+|    600.000000 | RM001        |
++---------------+--------------+
+8 rows in set (0.05 sec)
+4.Find the average total for all the products mentioned in the table:
+
+ SELECT AVG(price) AS average_total
+    -> FROM product;
++---------------+
+| average_total |
++---------------+
+|    618.750000 |
++---------------+
+1 row in set (0.05 sec)
