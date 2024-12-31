@@ -1,3 +1,24 @@
+table 1
+CREATE TABLE country (
+    country_id INT PRIMARY KEY,
+    country_name VARCHAR(100) NOT NULL
+);
+table 2
+CREATE TABLE city (
+    city_id INT PRIMARY KEY,
+    city_name VARCHAR(100) NOT NULL,
+    country_id INT,
+    FOREIGN KEY (country_id) REFERENCES country(country_id)
+);
+table 3
+CREATE TABLE city (
+    city_id INT PRIMARY KEY,
+    city_name VARCHAR(100) NOT NULL,
+    country_id INT,
+    FOREIGN KEY (country_id) REFERENCES country(country_id)
+);
+
+task 1
 > SELECT
     ->     c.country_name AS Country,
     ->     ci.city_name AS City,
