@@ -1,0 +1,41 @@
+> SELECT
+    ->     c.country_name AS Country,
+    ->     ci.city_name AS City,
+    ->     cu.customer_name AS Customers
+    -> FROM
+    ->     country c
+    -> LEFT JOIN
+    ->     city ci ON c.country_id = ci.country_id
+    -> LEFT JOIN
+    ->     customers cu ON ci.city_id = cu.city_id;.
++---------+----------+-----------+
+| Country | City     | Customers |
++---------+----------+-----------+
+| Germany | Berlin   | Alice     |
+| Croatia | Zagreb   | Bob       |
+| USA     | New York | Charlie   |
+| Spain   | NULL     | NULL      |
+| Russia  | NULL     | NULL      |
++---------+----------+-----------+
+5 rows in set (0.00 sec)
+
+
+TASK 2.
+mysql> SELECT
+    ->     c.country_name AS Country,
+    ->     ci.city_name AS City,
+    ->     cu.customer_name AS Customers
+    -> FROM
+    ->     country c
+    -> INNER JOIN
+    ->     city ci ON c.country_id = ci.country_id
+    -> LEFT JOIN
+    ->     customers cu ON ci.city_id = cu.city_id;
++---------+----------+-----------+
+| Country | City     | Customers |
++---------+----------+-----------+
+| Germany | Berlin   | Alice     |
+| Croatia | Zagreb   | Bob       |
+| USA     | New York | Charlie   |
++---------+----------+-----------+
+3 rows in set (0.00 sec)
